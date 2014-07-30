@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Seguridad Pública by mexicoevalua</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Seguridad Pública</h1>
+          <h2>Micrositio de México Evalúa</h2>
+        </header>
+
+        <hr>
+  <div id="share-button-top" class='share-button share-button-top'></div>
+  <script src='javascripts/share.min.js'></script>
+  <script>
+    var share = new Share("#share-button-top", {
+      networks: {
+        facebook: {
+          app_id: "602752456409826",
+        }
+      }
+    });
+  </script>
+        <section id="main_content">
+          <h3>
+<a name="objetivos-del-micrositio" class="anchor" href="#objetivos-del-micrositio"><span class="octicon octicon-link"></span></a>Objetivos del micrositio</h3>
+
+<ol>
+<li> Generar conocimiento y evidencia en las áreas de seguridad, justicia y prevención del delito que contribuyan a reducir los niveles de inseguridad en el país</li>
+<li> Comunicar el más reciente y avanzado análisis de seguridad pública de una manera interactiva y fácil de entender para todos los ciudadanos</li>
+<li>Fomentar la investigación y la discusión a través de una política de datos abiertos y análisis replicable</li>
+</ol><p>En este micrositio podrá encontrar los vínculos a los repositorios que contienen los datos y rutinas estadísticas necesarias para replicar y continuar con los temas de análisis. Consulte la página de <a href="https://github.com/mexicoevalua">México Evalúa</a> en GitHub para ver un consolidado de todos los repositorios.</p>
+
+<hr><h2>
+<a name="contenido" class="anchor" href="#contenido"><span class="octicon octicon-link"></span></a>Contenido</h2>
+
+<h3>
+<a name="pobreza-y-cr%C3%ADmen-en-m%C3%A9xico---mapa-interactivo" class="anchor" href="#pobreza-y-cr%C3%ADmen-en-m%C3%A9xico---mapa-interactivo"><span class="octicon octicon-link"></span></a>Pobreza y Crímen en México - Mapa Interactivo</h3>
+
+<p>Publicado por <a href="https://github.com/josecarlosgonz">Jose Gonzalez</a>
+<a href="https://a.tiles.mapbox.com/v3/josecarlosgonz.heogo3n7/page.html?secure=1#6/23.846/-101.140"><img src="https://raw.githubusercontent.com/mexicoevalua/crime/master/images/crime%20and%20poverty.png" alt="Crimen y pobreza en México"></a><a href="https://a.tiles.mapbox.com/v3/josecarlosgonz.heogo3n7/page.html?secure=1#6/23.846/-101.140">Consulta la versión interactiva</a></p>
+
+<p>Con el objetivo de analizar visualmente la relación entre crimen y pobreza en los municipios de México, hemos creado un mapa interactivo.</p>
+
+<p> El mapa fue elaborado con la información más reciente. Los datos sobre pobreza municipal más recientes corresponden a 2010. Por su parte, las estadísticas sobre crímenes del fuero común están disponibles para los años 2011, 2012 y 2013. Aún así, el mapa revela algunos aspectos interesantes. Para ver el mapa haz <a href="https://a.tiles.mapbox.com/v3/josecarlosgonz.heogo3n7/page.html?secure=1#6/23.846/-101.140">click aquí</a>.</p>
+
+<p>Una de las principales conclusiones del mapa es que sólo algunos municipios muestran altas concentraciones de crímenes. Asimismo, no parece haber una relación directa entre crimen y pobreza.</p>
+
+<p>Para realizar el análisis se utilizó únicamente software de uso libre: <a href="http://www.r-project.org/">R</a> para los cálculos, <a href="http://www.qgis.org/en/site/">QGIS</a> para el aspecto geográfico y <a href="https://www.mapbox.com/tilemill/">TileMill</a> para crear un mapa interactivo.</p>
+
+<p>Los datos utilizados fueron tomados de <a href="http://www.coneval.gob.mx/Medicion/Paginas/Medici%C3%B3n/Medicion-de-la-pobreza-municipal-2010.aspx">CONEVAL</a>, los polígonos de los municipios fueron tomados del <a href="http://www.inegi.org.mx/geo/contenidos/geoestadistica/default.aspx">INEGI</a> y las estadísticas de crímen fueron tomadas del <a href="http://www.secretariadoejecutivosnsp.gob.mx/">Secretariado Ejecutivo de Seguridad Pública</a>.</p>
+
+<p>Debido a la funcionalidad intermitente del portal del Secretariado Ejecutivo, se utilizó un subconjunto de datos que contiene delitos seleccionados del fuero común.En total, durante 2011, 2012 y 2013 se registraron 1,157,425 crímenes. El siguiente diagrama muestra la tipografía de los delitos analizados.</p>
+
+<p><img src="https://raw.githubusercontent.com/mexicoevalua/crime/master/images/selected_crimes.png" alt="Delitos selecionados"></p>
+
+<p>Aún existe mucho que analizar con estos datos. Por lo tanto, los invitamos a continuar con el análisis. Todos los datos y rutinas estadísticas se encuentran en <a href="https://github.com/mexicoevalua/crime">este repositorio</a>. Tanto el análisis como los datos son de libre uso, sólo pedimos que se haga referencia a México Evalúa y los autores del artículo cuando utilicen. </p>
+
+<hr><p><strong>Nota:</strong> este artículo se sólo de una prueba para evaluar el contenido del micrositio. La versión original del artículo y derechos de autor pertenecen a Jose González. La versión original puede ser consultada <a href="http://www.jose-gonzalez.org/poverty-and-crime-in-mexico/#.Uzh0ca1dUmc">aquí</a>.</p>
+        </section>
+
+        <footer>
+          Seguridad Pública es mantenido por <a href="https://github.com/mexicoevalua">México Evalúa</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
