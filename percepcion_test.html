@@ -1,0 +1,1168 @@
+<!doctype HTML>
+<meta charset = 'utf-8'>
+<html>
+  <head>
+    
+    <script src='http://d3js.org/d3.v3.min.js' type='text/javascript'></script>
+    <script src='http://d3js.org/topojson.v1.min.js' type='text/javascript'></script>
+    <script src='http://datamaps.github.io/scripts/datamaps.all.min.js' type='text/javascript'></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0/handlebars.min.js' type='text/javascript'></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js' type='text/javascript'></script>
+    
+    <style>
+    .rChart {
+      display: block;
+      margin-left: auto; 
+      margin-right: auto;
+      width: 800px;
+      height: 400px;
+    }  
+    </style>
+    
+  </head>
+  <body ng-app ng-controller='rChartsCtrl'>
+    
+     
+                   
+                   <div class='container'>
+                   <div class="btn-group" >
+                   <button ng-repeat="value in years" ng-click='updateYear(value)'
+                   class="btn btn-default" type="button" 
+                   ng-model="value" btn-radio="value">
+    
+                   </button>
+                   </div>
+                   <div id='chart_1' class='rChart datamaps'></div>  
+                   </div>
+                   <script>
+                   function rChartsCtrl($scope){
+                   $scope.years = [2011, 2012, 2013]
+                   $scope.year = $scope.years[0]
+                   $scope.updateYear = function(x){
+                   $scope.year = x
+                   }
+                   $scope.$watch('year', function(newYear){
+                   mapchart_1.updateChoropleth(chartParams.newData[newYear]);
+                   })
+                   }
+                   </script>      
+    <script id='popup-template' type='text/x-handlebars-template'>
+    
+</script>
+<script>
+  var chartParams = {
+ "dom": "chart_1",
+"width":    800,
+"height":    400,
+"geographyConfig": {
+ "dataUrl": "shapefiles/mx_states.json",
+"popupTemplate":  function(geography, data) { //this function should just return a string
+    return '<div class=hoverinfo>' + geography.properties.name + ': ' + data.percepcion + '</div>';
+    }   
+},
+"scope": "states",
+"labels": true,
+"bodyattrs": "ng-app ng-controller='rChartsCtrl'",
+"setProjection":  function( element, options ) {
+  
+  var projection, path;
+  
+  projection = d3.geo.mercator()
+  .center([-90, 24])
+  .scale(element.offsetWidth)
+  .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+  
+  path = d3.geo.path()
+  .projection( projection );
+  
+  return {path: path, projection: projection};
+  } ,
+"fills": {
+ "[19,51]": "#FFFFB2",
+"(51,61]": "#FECC5C",
+"(61,75]": "#FD8D3C",
+"(75,81]": "#F03B20",
+"(81,91]": "#BD0026",
+"defaultFill": "#BD0026" 
+},
+"data": {
+ "AGS": {
+ "state_code": 1,
+"name": "AGS",
+"state_name": "Aguascalientes",
+"year":   2011,
+"percepcion": "61",
+"fillKey": "(51,61]" 
+},
+"BC": {
+ "state_code": 2,
+"name": "BC",
+"state_name": "Baja California",
+"year":   2011,
+"percepcion": "58",
+"fillKey": "(51,61]" 
+},
+"BCS": {
+ "state_code": 3,
+"name": "BCS",
+"state_name": "Baja California Sur",
+"year":   2011,
+"percepcion": "37",
+"fillKey": "[19,51]" 
+},
+"CAM": {
+ "state_code": 4,
+"name": "CAM",
+"state_name": "Campeche",
+"year":   2011,
+"percepcion": "51",
+"fillKey": "[19,51]" 
+},
+"COA": {
+ "state_code": 5,
+"name": "COA",
+"state_name": "Coahuila de Zaragoza",
+"year":   2011,
+"percepcion": "65",
+"fillKey": "(61,75]" 
+},
+"COL": {
+ "state_code": 6,
+"name": "COL",
+"state_name": "Colima",
+"year":   2011,
+"percepcion": "66",
+"fillKey": "(61,75]" 
+},
+"CHIS": {
+ "state_code": 7,
+"name": "CHIS",
+"state_name": "Chiapas",
+"year":   2011,
+"percepcion": "38",
+"fillKey": "[19,51]" 
+},
+"CHIH": {
+ "state_code": 8,
+"name": "CHIH",
+"state_name": "Chihuahua",
+"year":   2011,
+"percepcion": "89",
+"fillKey": "(81,91]" 
+},
+"DF": {
+ "state_code": 9,
+"name": "DF",
+"state_name": "Distrito Federal",
+"year":   2011,
+"percepcion": "75",
+"fillKey": "(75,81]" 
+},
+"DUR": {
+ "state_code": 10,
+"name": "DUR",
+"state_name": "Durango",
+"year":   2011,
+"percepcion": "88",
+"fillKey": "(81,91]" 
+},
+"GTO": {
+ "state_code": 11,
+"name": "GTO",
+"state_name": "Guanajuato",
+"year":   2011,
+"percepcion": "54",
+"fillKey": "(51,61]" 
+},
+"GRO": {
+ "state_code": 12,
+"name": "GRO",
+"state_name": "Guerrero",
+"year":   2011,
+"percepcion": "73",
+"fillKey": "(61,75]" 
+},
+"HGO": {
+ "state_code": 13,
+"name": "HGO",
+"state_name": "Hidalgo",
+"year":   2011,
+"percepcion": "55",
+"fillKey": "(51,61]" 
+},
+"JAL": {
+ "state_code": 14,
+"name": "JAL",
+"state_name": "Jalisco",
+"year":   2011,
+"percepcion": "71",
+"fillKey": "(61,75]" 
+},
+"MEX": {
+ "state_code": 15,
+"name": "MEX",
+"state_name": "Estado de Mü¾˜–”¼ü¾Ž–„¼xico",
+"year":   2011,
+"percepcion": "84",
+"fillKey": "(81,91]" 
+},
+"MICH": {
+ "state_code": 16,
+"name": "MICH",
+"state_name": "Michoacü¾˜–”¼ü¾™ƒ ¼n de Ocampo",
+"year":   2011,
+"percepcion": "76",
+"fillKey": "(75,81]" 
+},
+"MOR": {
+ "state_code": 17,
+"name": "MOR",
+"state_name": "Morelos",
+"year":   2011,
+"percepcion": "81",
+"fillKey": "(75,81]" 
+},
+"NAY": {
+ "state_code": 18,
+"name": "NAY",
+"state_name": "Nayarit",
+"year":   2011,
+"percepcion": "79",
+"fillKey": "(75,81]" 
+},
+"NL": {
+ "state_code": 19,
+"name": "NL",
+"state_name": "Nuevo Leü¾˜–”¼_n",
+"year":   2011,
+"percepcion": "84",
+"fillKey": "(81,91]" 
+},
+"OAX": {
+ "state_code": 20,
+"name": "OAX",
+"state_name": "Oaxaca",
+"year":   2011,
+"percepcion": "73",
+"fillKey": "(61,75]" 
+},
+"PUE": {
+ "state_code": 21,
+"name": "PUE",
+"state_name": "Puebla",
+"year":   2011,
+"percepcion": "64",
+"fillKey": "(61,75]" 
+},
+"QR": {
+ "state_code": 22,
+"name": "QR",
+"state_name": "Querü¾˜–”¼ü¾Ž–„¼taro",
+"year":   2011,
+"percepcion": "30",
+"fillKey": "[19,51]" 
+},
+"QROO": {
+ "state_code": 23,
+"name": "QROO",
+"state_name": "Quintana Roo",
+"year":   2011,
+"percepcion": "64",
+"fillKey": "(61,75]" 
+},
+"SLP": {
+ "state_code": 24,
+"name": "SLP",
+"state_name": "San Luis Potosü¾˜–”¼_",
+"year":   2011,
+"percepcion": "77",
+"fillKey": "(75,81]" 
+},
+"SIN": {
+ "state_code": 25,
+"name": "SIN",
+"state_name": "Sinaloa",
+"year":   2011,
+"percepcion": "81",
+"fillKey": "(75,81]" 
+},
+"SON": {
+ "state_code": 26,
+"name": "SON",
+"state_name": "Sonora",
+"year":   2011,
+"percepcion": "46",
+"fillKey": "[19,51]" 
+},
+"TAB": {
+ "state_code": 27,
+"name": "TAB",
+"state_name": "Tabasco",
+"year":   2011,
+"percepcion": "78",
+"fillKey": "(75,81]" 
+},
+"TAM": {
+ "state_code": 28,
+"name": "TAM",
+"state_name": "Tamaulipas",
+"year":   2011,
+"percepcion": "83",
+"fillKey": "(81,91]" 
+},
+"TLA": {
+ "state_code": 29,
+"name": "TLA",
+"state_name": "Tlaxcala",
+"year":   2011,
+"percepcion": "41",
+"fillKey": "[19,51]" 
+},
+"VER": {
+ "state_code": 30,
+"name": "VER",
+"state_name": "Veracruz de Ignacio de la Llave",
+"year":   2011,
+"percepcion": "65",
+"fillKey": "(61,75]" 
+},
+"YUC": {
+ "state_code": 31,
+"name": "YUC",
+"state_name": "Yucatü¾˜–”¼ü¾™ƒ ¼n",
+"year":   2011,
+"percepcion": "26",
+"fillKey": "[19,51]" 
+},
+"ZAC": {
+ "state_code": 32,
+"name": "ZAC",
+"state_name": "Zacatecas",
+"year":   2011,
+"percepcion": "83",
+"fillKey": "(81,91]" 
+} 
+},
+"legend": true,
+"id": "chart_1",
+"newData": {
+ "2011": {
+ "AGS": {
+ "state_code": 1,
+"name": "AGS",
+"state_name": "Aguascalientes",
+"year":   2011,
+"percepcion": "61",
+"fillKey": "(51,61]" 
+},
+"BC": {
+ "state_code": 2,
+"name": "BC",
+"state_name": "Baja California",
+"year":   2011,
+"percepcion": "58",
+"fillKey": "(51,61]" 
+},
+"BCS": {
+ "state_code": 3,
+"name": "BCS",
+"state_name": "Baja California Sur",
+"year":   2011,
+"percepcion": "37",
+"fillKey": "[19,51]" 
+},
+"CAM": {
+ "state_code": 4,
+"name": "CAM",
+"state_name": "Campeche",
+"year":   2011,
+"percepcion": "51",
+"fillKey": "[19,51]" 
+},
+"COA": {
+ "state_code": 5,
+"name": "COA",
+"state_name": "Coahuila de Zaragoza",
+"year":   2011,
+"percepcion": "65",
+"fillKey": "(61,75]" 
+},
+"COL": {
+ "state_code": 6,
+"name": "COL",
+"state_name": "Colima",
+"year":   2011,
+"percepcion": "66",
+"fillKey": "(61,75]" 
+},
+"CHIS": {
+ "state_code": 7,
+"name": "CHIS",
+"state_name": "Chiapas",
+"year":   2011,
+"percepcion": "38",
+"fillKey": "[19,51]" 
+},
+"CHIH": {
+ "state_code": 8,
+"name": "CHIH",
+"state_name": "Chihuahua",
+"year":   2011,
+"percepcion": "89",
+"fillKey": "(81,91]" 
+},
+"DF": {
+ "state_code": 9,
+"name": "DF",
+"state_name": "Distrito Federal",
+"year":   2011,
+"percepcion": "75",
+"fillKey": "(75,81]" 
+},
+"DUR": {
+ "state_code": 10,
+"name": "DUR",
+"state_name": "Durango",
+"year":   2011,
+"percepcion": "88",
+"fillKey": "(81,91]" 
+},
+"GTO": {
+ "state_code": 11,
+"name": "GTO",
+"state_name": "Guanajuato",
+"year":   2011,
+"percepcion": "54",
+"fillKey": "(51,61]" 
+},
+"GRO": {
+ "state_code": 12,
+"name": "GRO",
+"state_name": "Guerrero",
+"year":   2011,
+"percepcion": "73",
+"fillKey": "(61,75]" 
+},
+"HGO": {
+ "state_code": 13,
+"name": "HGO",
+"state_name": "Hidalgo",
+"year":   2011,
+"percepcion": "55",
+"fillKey": "(51,61]" 
+},
+"JAL": {
+ "state_code": 14,
+"name": "JAL",
+"state_name": "Jalisco",
+"year":   2011,
+"percepcion": "71",
+"fillKey": "(61,75]" 
+},
+"MEX": {
+ "state_code": 15,
+"name": "MEX",
+"state_name": "Estado de Mü¾˜–”¼ü¾Ž–„¼xico",
+"year":   2011,
+"percepcion": "84",
+"fillKey": "(81,91]" 
+},
+"MICH": {
+ "state_code": 16,
+"name": "MICH",
+"state_name": "Michoacü¾˜–”¼ü¾™ƒ ¼n de Ocampo",
+"year":   2011,
+"percepcion": "76",
+"fillKey": "(75,81]" 
+},
+"MOR": {
+ "state_code": 17,
+"name": "MOR",
+"state_name": "Morelos",
+"year":   2011,
+"percepcion": "81",
+"fillKey": "(75,81]" 
+},
+"NAY": {
+ "state_code": 18,
+"name": "NAY",
+"state_name": "Nayarit",
+"year":   2011,
+"percepcion": "79",
+"fillKey": "(75,81]" 
+},
+"NL": {
+ "state_code": 19,
+"name": "NL",
+"state_name": "Nuevo Leü¾˜–”¼_n",
+"year":   2011,
+"percepcion": "84",
+"fillKey": "(81,91]" 
+},
+"OAX": {
+ "state_code": 20,
+"name": "OAX",
+"state_name": "Oaxaca",
+"year":   2011,
+"percepcion": "73",
+"fillKey": "(61,75]" 
+},
+"PUE": {
+ "state_code": 21,
+"name": "PUE",
+"state_name": "Puebla",
+"year":   2011,
+"percepcion": "64",
+"fillKey": "(61,75]" 
+},
+"QR": {
+ "state_code": 22,
+"name": "QR",
+"state_name": "Querü¾˜–”¼ü¾Ž–„¼taro",
+"year":   2011,
+"percepcion": "30",
+"fillKey": "[19,51]" 
+},
+"QROO": {
+ "state_code": 23,
+"name": "QROO",
+"state_name": "Quintana Roo",
+"year":   2011,
+"percepcion": "64",
+"fillKey": "(61,75]" 
+},
+"SLP": {
+ "state_code": 24,
+"name": "SLP",
+"state_name": "San Luis Potosü¾˜–”¼_",
+"year":   2011,
+"percepcion": "77",
+"fillKey": "(75,81]" 
+},
+"SIN": {
+ "state_code": 25,
+"name": "SIN",
+"state_name": "Sinaloa",
+"year":   2011,
+"percepcion": "81",
+"fillKey": "(75,81]" 
+},
+"SON": {
+ "state_code": 26,
+"name": "SON",
+"state_name": "Sonora",
+"year":   2011,
+"percepcion": "46",
+"fillKey": "[19,51]" 
+},
+"TAB": {
+ "state_code": 27,
+"name": "TAB",
+"state_name": "Tabasco",
+"year":   2011,
+"percepcion": "78",
+"fillKey": "(75,81]" 
+},
+"TAM": {
+ "state_code": 28,
+"name": "TAM",
+"state_name": "Tamaulipas",
+"year":   2011,
+"percepcion": "83",
+"fillKey": "(81,91]" 
+},
+"TLA": {
+ "state_code": 29,
+"name": "TLA",
+"state_name": "Tlaxcala",
+"year":   2011,
+"percepcion": "41",
+"fillKey": "[19,51]" 
+},
+"VER": {
+ "state_code": 30,
+"name": "VER",
+"state_name": "Veracruz de Ignacio de la Llave",
+"year":   2011,
+"percepcion": "65",
+"fillKey": "(61,75]" 
+},
+"YUC": {
+ "state_code": 31,
+"name": "YUC",
+"state_name": "Yucatü¾˜–”¼ü¾™ƒ ¼n",
+"year":   2011,
+"percepcion": "26",
+"fillKey": "[19,51]" 
+},
+"ZAC": {
+ "state_code": 32,
+"name": "ZAC",
+"state_name": "Zacatecas",
+"year":   2011,
+"percepcion": "83",
+"fillKey": "(81,91]" 
+} 
+},
+"2012": {
+ "AGS": {
+ "state_code": 1,
+"name": "AGS",
+"state_name": "Aguascalientes",
+"year":   2012,
+"percepcion": "46",
+"fillKey": "[19,51]" 
+},
+"BC": {
+ "state_code": 2,
+"name": "BC",
+"state_name": "Baja California",
+"year":   2012,
+"percepcion": "51",
+"fillKey": "(51,61]" 
+},
+"BCS": {
+ "state_code": 3,
+"name": "BCS",
+"state_name": "Baja California Sur",
+"year":   2012,
+"percepcion": "24",
+"fillKey": "[19,51]" 
+},
+"CAM": {
+ "state_code": 4,
+"name": "CAM",
+"state_name": "Campeche",
+"year":   2012,
+"percepcion": "44",
+"fillKey": "[19,51]" 
+},
+"COA": {
+ "state_code": 5,
+"name": "COA",
+"state_name": "Coahuila de Zaragoza",
+"year":   2012,
+"percepcion": "75",
+"fillKey": "(61,75]" 
+},
+"COL": {
+ "state_code": 6,
+"name": "COL",
+"state_name": "Colima",
+"year":   2012,
+"percepcion": "70",
+"fillKey": "(61,75]" 
+},
+"CHIS": {
+ "state_code": 7,
+"name": "CHIS",
+"state_name": "Chiapas",
+"year":   2012,
+"percepcion": "38",
+"fillKey": "[19,51]" 
+},
+"CHIH": {
+ "state_code": 8,
+"name": "CHIH",
+"state_name": "Chihuahua",
+"year":   2012,
+"percepcion": "83",
+"fillKey": "(81,91]" 
+},
+"DF": {
+ "state_code": 9,
+"name": "DF",
+"state_name": "Distrito Federal",
+"year":   2012,
+"percepcion": "71",
+"fillKey": "(61,75]" 
+},
+"DUR": {
+ "state_code": 10,
+"name": "DUR",
+"state_name": "Durango",
+"year":   2012,
+"percepcion": "82",
+"fillKey": "(81,91]" 
+},
+"GTO": {
+ "state_code": 11,
+"name": "GTO",
+"state_name": "Guanajuato",
+"year":   2012,
+"percepcion": "55",
+"fillKey": "(51,61]" 
+},
+"GRO": {
+ "state_code": 12,
+"name": "GRO",
+"state_name": "Guerrero",
+"year":   2012,
+"percepcion": "75",
+"fillKey": "(75,81]" 
+},
+"HGO": {
+ "state_code": 13,
+"name": "HGO",
+"state_name": "Hidalgo",
+"year":   2012,
+"percepcion": "49",
+"fillKey": "[19,51]" 
+},
+"JAL": {
+ "state_code": 14,
+"name": "JAL",
+"state_name": "Jalisco",
+"year":   2012,
+"percepcion": "61",
+"fillKey": "(51,61]" 
+},
+"MEX": {
+ "state_code": 15,
+"name": "MEX",
+"state_name": "Estado de Mü¾˜–”¼ü¾Ž–„¼xico",
+"year":   2012,
+"percepcion": "85",
+"fillKey": "(81,91]" 
+},
+"MICH": {
+ "state_code": 16,
+"name": "MICH",
+"state_name": "Michoacü¾˜–”¼ü¾™ƒ ¼n de Ocampo",
+"year":   2012,
+"percepcion": "76",
+"fillKey": "(75,81]" 
+},
+"MOR": {
+ "state_code": 17,
+"name": "MOR",
+"state_name": "Morelos",
+"year":   2012,
+"percepcion": "81",
+"fillKey": "(81,91]" 
+},
+"NAY": {
+ "state_code": 18,
+"name": "NAY",
+"state_name": "Nayarit",
+"year":   2012,
+"percepcion": "73",
+"fillKey": "(61,75]" 
+},
+"NL": {
+ "state_code": 19,
+"name": "NL",
+"state_name": "Nuevo Leü¾˜–”¼_n",
+"year":   2012,
+"percepcion": "87",
+"fillKey": "(81,91]" 
+},
+"OAX": {
+ "state_code": 20,
+"name": "OAX",
+"state_name": "Oaxaca",
+"year":   2012,
+"percepcion": "61",
+"fillKey": "(51,61]" 
+},
+"PUE": {
+ "state_code": 21,
+"name": "PUE",
+"state_name": "Puebla",
+"year":   2012,
+"percepcion": "58",
+"fillKey": "(51,61]" 
+},
+"QR": {
+ "state_code": 22,
+"name": "QR",
+"state_name": "Querü¾˜–”¼ü¾Ž–„¼taro",
+"year":   2012,
+"percepcion": "29",
+"fillKey": "[19,51]" 
+},
+"QROO": {
+ "state_code": 23,
+"name": "QROO",
+"state_name": "Quintana Roo",
+"year":   2012,
+"percepcion": "60",
+"fillKey": "(51,61]" 
+},
+"SLP": {
+ "state_code": 24,
+"name": "SLP",
+"state_name": "San Luis Potosü¾˜–”¼_",
+"year":   2012,
+"percepcion": "60",
+"fillKey": "(51,61]" 
+},
+"SIN": {
+ "state_code": 25,
+"name": "SIN",
+"state_name": "Sinaloa",
+"year":   2012,
+"percepcion": "78",
+"fillKey": "(75,81]" 
+},
+"SON": {
+ "state_code": 26,
+"name": "SON",
+"state_name": "Sonora",
+"year":   2012,
+"percepcion": "42",
+"fillKey": "[19,51]" 
+},
+"TAB": {
+ "state_code": 27,
+"name": "TAB",
+"state_name": "Tabasco",
+"year":   2012,
+"percepcion": "71",
+"fillKey": "(61,75]" 
+},
+"TAM": {
+ "state_code": 28,
+"name": "TAM",
+"state_name": "Tamaulipas",
+"year":   2012,
+"percepcion": "83",
+"fillKey": "(81,91]" 
+},
+"TLA": {
+ "state_code": 29,
+"name": "TLA",
+"state_name": "Tlaxcala",
+"year":   2012,
+"percepcion": "40",
+"fillKey": "[19,51]" 
+},
+"VER": {
+ "state_code": 30,
+"name": "VER",
+"state_name": "Veracruz de Ignacio de la Llave",
+"year":   2012,
+"percepcion": "70",
+"fillKey": "(61,75]" 
+},
+"YUC": {
+ "state_code": 31,
+"name": "YUC",
+"state_name": "Yucatü¾˜–”¼ü¾™ƒ ¼n",
+"year":   2012,
+"percepcion": "19",
+"fillKey": "[19,51]" 
+},
+"ZAC": {
+ "state_code": 32,
+"name": "ZAC",
+"state_name": "Zacatecas",
+"year":   2012,
+"percepcion": "80",
+"fillKey": "(75,81]" 
+} 
+},
+"2013": {
+ "AGS": {
+ "state_code": 1,
+"name": "AGS",
+"state_name": "Aguascalientes",
+"year":   2013,
+"percepcion": "52",
+"fillKey": "(51,61]" 
+},
+"BC": {
+ "state_code": 2,
+"name": "BC",
+"state_name": "Baja California",
+"year":   2013,
+"percepcion": "51",
+"fillKey": "(51,61]" 
+},
+"BCS": {
+ "state_code": 3,
+"name": "BCS",
+"state_name": "Baja California Sur",
+"year":   2013,
+"percepcion": "30",
+"fillKey": "[19,51]" 
+},
+"CAM": {
+ "state_code": 4,
+"name": "CAM",
+"state_name": "Campeche",
+"year":   2013,
+"percepcion": "57",
+"fillKey": "(51,61]" 
+},
+"COA": {
+ "state_code": 5,
+"name": "COA",
+"state_name": "Coahuila de Zaragoza",
+"year":   2013,
+"percepcion": "82",
+"fillKey": "(81,91]" 
+},
+"COL": {
+ "state_code": 6,
+"name": "COL",
+"state_name": "Colima",
+"year":   2013,
+"percepcion": "71",
+"fillKey": "(61,75]" 
+},
+"CHIS": {
+ "state_code": 7,
+"name": "CHIS",
+"state_name": "Chiapas",
+"year":   2013,
+"percepcion": "51",
+"fillKey": "[19,51]" 
+},
+"CHIH": {
+ "state_code": 8,
+"name": "CHIH",
+"state_name": "Chihuahua",
+"year":   2013,
+"percepcion": "78",
+"fillKey": "(75,81]" 
+},
+"DF": {
+ "state_code": 9,
+"name": "DF",
+"state_name": "Distrito Federal",
+"year":   2013,
+"percepcion": "73",
+"fillKey": "(61,75]" 
+},
+"DUR": {
+ "state_code": 10,
+"name": "DUR",
+"state_name": "Durango",
+"year":   2013,
+"percepcion": "78",
+"fillKey": "(75,81]" 
+},
+"GTO": {
+ "state_code": 11,
+"name": "GTO",
+"state_name": "Guanajuato",
+"year":   2013,
+"percepcion": "59",
+"fillKey": "(51,61]" 
+},
+"GRO": {
+ "state_code": 12,
+"name": "GRO",
+"state_name": "Guerrero",
+"year":   2013,
+"percepcion": "87",
+"fillKey": "(81,91]" 
+},
+"HGO": {
+ "state_code": 13,
+"name": "HGO",
+"state_name": "Hidalgo",
+"year":   2013,
+"percepcion": "56",
+"fillKey": "(51,61]" 
+},
+"JAL": {
+ "state_code": 14,
+"name": "JAL",
+"state_name": "Jalisco",
+"year":   2013,
+"percepcion": "76",
+"fillKey": "(75,81]" 
+},
+"MEX": {
+ "state_code": 15,
+"name": "MEX",
+"state_name": "Estado de Mü¾˜–”¼ü¾Ž–„¼xico",
+"year":   2013,
+"percepcion": "91",
+"fillKey": "(81,91]" 
+},
+"MICH": {
+ "state_code": 16,
+"name": "MICH",
+"state_name": "Michoacü¾˜–”¼ü¾™ƒ ¼n de Ocampo",
+"year":   2013,
+"percepcion": "80",
+"fillKey": "(75,81]" 
+},
+"MOR": {
+ "state_code": 17,
+"name": "MOR",
+"state_name": "Morelos",
+"year":   2013,
+"percepcion": "86",
+"fillKey": "(81,91]" 
+},
+"NAY": {
+ "state_code": 18,
+"name": "NAY",
+"state_name": "Nayarit",
+"year":   2013,
+"percepcion": "57",
+"fillKey": "(51,61]" 
+},
+"NL": {
+ "state_code": 19,
+"name": "NL",
+"state_name": "Nuevo Leü¾˜–”¼_n",
+"year":   2013,
+"percepcion": "80",
+"fillKey": "(75,81]" 
+},
+"OAX": {
+ "state_code": 20,
+"name": "OAX",
+"state_name": "Oaxaca",
+"year":   2013,
+"percepcion": "67",
+"fillKey": "(61,75]" 
+},
+"PUE": {
+ "state_code": 21,
+"name": "PUE",
+"state_name": "Puebla",
+"year":   2013,
+"percepcion": "63",
+"fillKey": "(61,75]" 
+},
+"QR": {
+ "state_code": 22,
+"name": "QR",
+"state_name": "Querü¾˜–”¼ü¾Ž–„¼taro",
+"year":   2013,
+"percepcion": "41",
+"fillKey": "[19,51]" 
+},
+"QROO": {
+ "state_code": 23,
+"name": "QROO",
+"state_name": "Quintana Roo",
+"year":   2013,
+"percepcion": "70",
+"fillKey": "(61,75]" 
+},
+"SLP": {
+ "state_code": 24,
+"name": "SLP",
+"state_name": "San Luis Potosü¾˜–”¼_",
+"year":   2013,
+"percepcion": "78",
+"fillKey": "(75,81]" 
+},
+"SIN": {
+ "state_code": 25,
+"name": "SIN",
+"state_name": "Sinaloa",
+"year":   2013,
+"percepcion": "78",
+"fillKey": "(75,81]" 
+},
+"SON": {
+ "state_code": 26,
+"name": "SON",
+"state_name": "Sonora",
+"year":   2013,
+"percepcion": "52",
+"fillKey": "(51,61]" 
+},
+"TAB": {
+ "state_code": 27,
+"name": "TAB",
+"state_name": "Tabasco",
+"year":   2013,
+"percepcion": "83",
+"fillKey": "(81,91]" 
+},
+"TAM": {
+ "state_code": 28,
+"name": "TAM",
+"state_name": "Tamaulipas",
+"year":   2013,
+"percepcion": "84",
+"fillKey": "(81,91]" 
+},
+"TLA": {
+ "state_code": 29,
+"name": "TLA",
+"state_name": "Tlaxcala",
+"year":   2013,
+"percepcion": "52",
+"fillKey": "(51,61]" 
+},
+"VER": {
+ "state_code": 30,
+"name": "VER",
+"state_name": "Veracruz de Ignacio de la Llave",
+"year":   2013,
+"percepcion": "75",
+"fillKey": "(75,81]" 
+},
+"YUC": {
+ "state_code": 31,
+"name": "YUC",
+"state_name": "Yucatü¾˜–”¼ü¾™ƒ ¼n",
+"year":   2013,
+"percepcion": "32",
+"fillKey": "[19,51]" 
+},
+"ZAC": {
+ "state_code": 32,
+"name": "ZAC",
+"state_name": "Zacatecas",
+"year":   2013,
+"percepcion": "85",
+"fillKey": "(81,91]" 
+} 
+} 
+} 
+}
+  chartParams.element = document.getElementById('chart_1')
+  
+  
+  var mapchart_1 = new Datamap(chartParams);
+  
+  
+    
+  // draw a bubble map if specified
+  if (chartParams.bubbles) {
+    var bubbles = chartParams.bubbles
+    mapchart_1.bubbles(bubbles)
+  }
+  
+  if (chartParams.labels){
+    mapchart_1.labels()
+  }
+  
+  if (chartParams.legend){
+    mapchart_1.legend()
+  }
+  
+  setProjection = function( element, options ) {
+    var projection, path;
+ 
+      projection = d3.geo.albersUsa()
+        .scale(element.offsetWidth)
+        .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+ 
+    path = d3.geo.path()
+      .projection( projection );
+ 
+    return {path: path, projection: projection};
+  }
+</script>
+
+<style>
+.datamaps {
+  position: relative;
+}
+</style>
+    
+    <script></script>    
+  </body>
+</html>
